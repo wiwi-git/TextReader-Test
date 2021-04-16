@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		177C1B832629F327009D4DDF /* SteramReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177C1B822629F327009D4DDF /* SteramReader.swift */; };
 		17CA25A926257868006E6DCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA25A826257868006E6DCF /* AppDelegate.swift */; };
 		17CA25AB26257868006E6DCF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA25AA26257868006E6DCF /* SceneDelegate.swift */; };
 		17CA25AD26257868006E6DCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA25AC26257868006E6DCF /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		177C1B822629F327009D4DDF /* SteramReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteramReader.swift; sourceTree = "<group>"; };
 		17CA25A526257868006E6DCF /* TextViewMaximumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextViewMaximumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CA25A826257868006E6DCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17CA25AA26257868006E6DCF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				17CA25B12625786B006E6DCF /* Assets.xcassets */,
 				17CA25B32625786B006E6DCF /* LaunchScreen.storyboard */,
 				17CA25B62625786B006E6DCF /* Info.plist */,
+				177C1B822629F327009D4DDF /* SteramReader.swift */,
 			);
 			path = TextViewMaximumTest;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				177C1B832629F327009D4DDF /* SteramReader.swift in Sources */,
 				17CA25AD26257868006E6DCF /* ViewController.swift in Sources */,
 				17CA25A926257868006E6DCF /* AppDelegate.swift in Sources */,
 				17CA25AB26257868006E6DCF /* SceneDelegate.swift in Sources */,
