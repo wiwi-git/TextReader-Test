@@ -7,16 +7,6 @@
 
 import UIKit
 
-struct FileInfo {
-    let url:String
-    var filePointer:UnsafeMutablePointer<FILE>? = nil
-    var lineByteArrayPointer:UnsafeMutablePointer<CChar>? = nil
-    var lineCap:Int = 0
-    
-    func close() {
-        fclose(filePointer)
-    }
-}
 class ViewConroller: UIViewController {
     
     @IBOutlet weak var titleLabel:UILabel!
@@ -25,6 +15,7 @@ class ViewConroller: UIViewController {
     
     var streamReader:StreamReader!
     var maxTextCount:Int = 1
+    var testStringHeight = CGFloat(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,39 +29,37 @@ class ViewConroller: UIViewController {
         self.textView.contentSize = CGSize(width: self.textView.bounds.width, height: 0)
         let testString = NSString("A")
         
-        let testStringHeight = testString.size(withAttributes: [NSAttributedString.Key.font : self.textView.font! as UIFont]).height
+        self.testStringHeight = testString.size(withAttributes: [NSAttributedString.Key.font : self.textView.font! as UIFont]).height
         
-        while textView.contentSize.height <= (self.textView.frame.height - testStringHeight) {
+        while self.textView.contentSize.height <= (self.textView.frame.height - self.testStringHeight) {
             textView.text += "A"
         }
         
-        self.maxTextCount = textView.text.count
+        self.maxTextCount = self.textView.text.count
         self.textView.text = ""
-        print(self.maxTextCount)
         
         self.textView.isScrollEnabled = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        load(stream: &streamReader)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.load(stream: &self.streamReader)
     }
     
     func load(stream:inout StreamReader) {
         while (true) {
-            if self.textView.contentSize.height < self.textView.frame.height {
+            if textView.contentSize.height < (self.textView.frame.height - self.testStringHeight) {
                 if let nextLine = stream.nextLine() {
-                    self.textView.text += nextLine
+                    try? print(stream.fileHandle.offset())
+                    self.textView.text += nextLine + "\n"
                 } else {
                     print("end")
-                    self.nextButton.isEnabled = false
                     break;
                 }
             } else {
                 break;
             }
         }
-        textView.isScrollEnabled = false
     }
     
     @objc func buttonAction() {
