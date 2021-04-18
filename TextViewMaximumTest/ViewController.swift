@@ -50,10 +50,11 @@ class ViewConroller: UIViewController {
         while (true) {
             if textView.contentSize.height < (self.textView.frame.height - self.testStringHeight) {
                 if let nextLine = stream.nextLine() {
-                    try? print(stream.fileHandle.offset())
+
                     self.textView.text += nextLine + "\n"
                 } else {
                     print("end")
+                    nextButton.isEnabled = false
                     break;
                 }
             } else {

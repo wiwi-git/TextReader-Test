@@ -38,18 +38,24 @@ class StreamReader {
     func nextLine() -> String? {
         if isAtEOF { return nil }
         repeat {
-            if let range = buffer.range(of: delimPattern, options: [], in: buffer.startIndex..<buffer.endIndex) {
-                let subData = buffer.subdata(in: buffer.startIndex..<range.lowerBound)
-                let line = String(data: subData, encoding: encoding)
-                buffer.replaceSubrange(buffer.startIndex..<range.upperBound, with: [])
-                return line
-            } else {
-                let tempData = fileHandle.readData(ofLength: chunkSize)
-                if tempData.count == 0 {
-                    isAtEOF = true
-                    return (buffer.count > 0) ? String(data: buffer, encoding: encoding) : nil
+            do {
+                if let range = buffer.range(of: delimPattern, options: [], in: buffer.startIndex..<buffer.endIndex) {
+                    let subData = buffer.subdata(in: buffer.startIndex..<range.lowerBound)
+                    let line = String(data: subData, encoding: encoding)
+                    buffer.replaceSubrange(buffer.startIndex..<range.upperBound, with: [])
+                    return line
+                } else {
+    //                let tempData = fileHandle.readData(ofLength: chunkSize)
+                    let tempData = try fileHandle.read(upToCount: chunkSize)
+                    if tempData == nil || tempData!.count == 0 {
+                        isAtEOF = true
+                        return (buffer.count > 0) ? String(data: buffer, encoding: encoding) : nil
+                    } else {
+                        buffer.append(tempData!)
+                    }
                 }
-                buffer.append(tempData)
+            } catch let err {
+                print(err)
             }
         } while true
     }
